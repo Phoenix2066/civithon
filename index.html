@@ -144,20 +144,32 @@
 <img alt="Civitronic-Z Emblem" class="w-56 md:w-80 h-56 md:h-80 relative z-10 intro-logo object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA60OH4cx5rx5nPbJ0tMRI-WXeheglrZbnqwCEjpuEvihTus9SeeWUCJTTX0WQkIo3H5z_OX53KfDxTz13dqBlsJUnqWPpyN23KmbgLTHajUmixBF3aDSz8-Wmvbj_XKbB7Qzf0P62CksMbsTOwhPIaeLOFV4OlmImNZqqQP3rFg_zFrH5LbH3DQHkMJXlX2YwWtaBM5iGLCe-QOnoXC5XAaeuEYFqOdnpinESJ62qmCK3J9cLjtGN9LuiZLGo2dmdhmm2eabhUszU"/>
 </div>
 <div class="text-center z-10">
-<h1 class="font-display-lg text-[50px] md:text-[120px] font-bold text-white tracking-[0.1em] leading-none mb-2 md:mb-4 select-none drop-shadow-[0_0_30px_rgba(255,31,31,0.3)]">CIVITHON</h1>
+<h1 class="font-display-lg text-[50px] md:text-[120px] font-bold text-white tracking-[0.1em] leading-none mb-2 md:mb-4 select-none drop-shadow-[0_0_30px_rgba(255,31,31,0.3)]">CIVITRONIC-Z</h1>
 <div class="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
-<p class="font-label-caps text-primary tracking-[0.8em] text-xs md:text-sm mt-4 md:mt-6">CIVITRONIC-Z</p>
+<p class="font-label-caps text-primary tracking-[0.8em] text-xs md:text-sm mt-4 md:mt-6">CIVITHON</p>
 </div>
 </div></div>
 <!-- Navigation Bar -->
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 md:px-12 py-0 rounded-full border border-white/10 glass-panel pill-glow min-w-[95%] md:min-w-[1200px] h-14 md:h-20">
-  <!-- Logo Section -->
-    <div class="flex items-center gap-2 md:gap-4 flex-shrink-0 h-full">
-        <div class="flex items-center justify-center w-28 md:w-36 h-full overflow-visible">
-            <img alt="Civitronic-Z Logo" class="h-[160%] md:h-[160%] w-auto object-contain" src="logo.png"/>
-        </div>
-        <span class="font-headline-sm text-sm md:text-xl font-bold text-white tracking-tight">CIVITRONIC-Z</span>
-    </div>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 md:px-12 rounded-full border border-white/10 glass-panel pill-glow w-[95%] md:w-[1200px] h-14 md:h-20">
+
+  <!-- Logo Section (GRID FIX - BEST ALIGNMENT) -->
+<div class="grid grid-cols-[auto_auto] items-center gap-3 md:gap-4 h-full">
+
+  <!-- Logo Container -->
+  <div class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16">
+    <img 
+      src="logo.png" 
+      alt="Civitronic-Z Logo"
+      class="w-full h-full object-cover block"
+    />
+  </div>
+
+  
+  <span class="font-headline-sm text-sm md:text-xl font-bold text-white leading-none whitespace-nowrap">
+    CIVITRONIC-Z
+  </span>
+
+</div>
 
   <!-- Center Navigation -->
   <div class="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
@@ -169,10 +181,30 @@
 
   <!-- Right Section -->
   <div class="flex items-center gap-4 md:gap-6 flex-shrink-0">
-    <span class="material-symbols-outlined text-lg md:text-xl text-on-surface-variant cursor-pointer hover:text-white transition-colors" onclick="toggleTheme(this)">light_mode</span>
-    <img alt="BMSIT Logo" class="w-7 md:w-9 h-7 md:h-9 rounded-full border border-outline-variant/30 object-cover" src="clgLogo.png"/>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScZ2eLSLH8R-llb3qhSu3--v5Dx8D4Gy0LSIGeiTqIB0PJ1MQ/viewform" target="_blank" class="hidden md:block bg-primary text-white px-5 md:px-7 py-2 rounded-full text-xs md:text-sm font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20">Register Now</a>
+
+    <span 
+      class="material-symbols-outlined text-lg md:text-xl text-on-surface-variant cursor-pointer hover:text-white transition-colors"
+      onclick="toggleTheme(this)"
+    >
+      light_mode
+    </span>
+
+    <img 
+      src="clgLogo.png" 
+      alt="BMSIT Logo" 
+      class="w-7 md:w-9 h-7 md:h-9 rounded-full border border-outline-variant/30 object-cover"
+    />
+
+    <a 
+      href="https://docs.google.com/forms/d/e/1FAIpQLScZ2eLSLH8R-llb3qhSu3--v5Dx8D4Gy0LSIGeiTqIB0PJ1MQ/viewform"
+      target="_blank"
+      class="hidden md:block bg-primary text-white px-5 md:px-7 py-2 rounded-full text-xs md:text-sm font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20"
+    >
+      Register Now
+    </a>
+
   </div>
+
 </nav>
 <!-- Hero Section -->
 <section class="relative min-h-screen flex items-center justify-center pt-24 px-margin-mobile md:px-margin-desktop grid-overlay overflow-hidden">
@@ -389,23 +421,34 @@
 </div>
 </div>
 <!-- Right Column: Club Info & Links -->
-<div class="flex flex-col md:items-end text-center md:text-right">
-<div class="flex items-center md:justify-end gap-4 mb-6">
+<div class="flex flex-col items-center md:items-end text-center md:text-right">
+
+<div class="flex items-center justify-center md:justify-end gap-4 mb-6 whitespace-nowrap">
 <img alt="Civitronic-Z" class="w-32 h-32 object-contain" src="logo.png"/>
-<span class="font-headline-md text-headline-md text-white">CIVITRONIC-Z</span>
+
+<span class="font-headline-md text-headline-md text-white whitespace-nowrap">
+CIVITRONIC-Z
+</span>
+
 </div>
+
 <p class="font-ui-mono text-on-surface-variant max-w-sm mb-8 leading-relaxed">
-                The premier interdisciplinary engineering club at BMSIT&amp;M, bridging the gap between structure and intelligence.
-            </p>
-<div class="flex flex-col md:items-end gap-4 mb-10">
-<a class="font-headline-sm text-white hover:text-primary transition-colors flex items-center gap-2" href="mailto:info@civitronicz.com">
-<span class="material-symbols-outlined text-primary text-xl">mail</span> civitroniczclub@gmail.com
-                </a>
-<div class="flex gap-4">
+The premier interdisciplinary engineering club at BMSIT&amp;M, bridging the gap between structure and intelligence.
+</p>
+
+<div class="flex flex-col items-center md:items-end gap-4 mb-10">
+
+<a class="font-headline-sm text-white hover:text-primary transition-colors flex items-center gap-2" href="mailto:civitroniczclub@gmail.com">
+<span class="material-symbols-outlined text-primary text-xl">mail</span>
+civitroniczclub@gmail.com
+</a>
+
+<div class="flex gap-4 justify-center md:justify-end">
+
 <!-- Share Current Page -->
-<a href="#" onclick="navigator.share ? navigator.share({ url: window.location.href }) : window.open(window.location.href, '_blank')"></a>
+<a href="#" onclick="navigator.share ? navigator.share({ url: window.location.href }) : window.open(window.location.href, '_blank')">
   <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all cursor-pointer">
-      <i class="fa-solid fa-globe text-white text-xl"></i>
+    <i class="fa-solid fa-globe text-white text-xl"></i>
   </div>
 </a>
 
@@ -415,16 +458,22 @@
     <i class="fa-brands fa-instagram text-white text-xl"></i>
   </div>
 </a>
+
 </div>
 
-<div class="pt-8 border-t border-white/5 w-full flex flex-col md:flex-row md:justify-end gap-6 font-ui-mono text-xs text-on-surface-variant">
+</div>
+
+<div class="pt-8 border-t border-white/5 w-full flex flex-col items-center md:flex-row md:justify-end gap-6 font-ui-mono text-xs text-on-surface-variant text-center md:text-right">
+
 <span>© 2026 CIVITRONIC-Z. ENGINEERED AT BMSIT&amp;M.</span>
-<div class="flex gap-4">
+
+<div class="flex gap-4 justify-center md:justify-end">
 <a class="hover:text-white transition-colors" href="#">PRIVACY</a>
 <a class="hover:text-white transition-colors" href="#">TERMS</a>
 </div>
+
 </div>
-</div>
+
 </div>
 </footer>
 <script>
