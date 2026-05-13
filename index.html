@@ -221,9 +221,11 @@
 <a href="https://docs.google.com/forms/d/e/1FAIpQLScZ2eLSLH8R-llb3qhSu3--v5Dx8D4Gy0LSIGeiTqIB0PJ1MQ/viewform" target="_blank" class="inline-block bg-primary text-white font-label-caps py-3 md:py-4 px-6 md:px-10 rounded-full border border-primary hover:bg-transparent hover:text-white transition-all duration-300 scale-95 active:scale-90 shadow-[0_0_20px_rgba(255,31,31,0.4)] text-sm md:text-base">
                 Register Now
             </a>
+<a href="Civithon.pdf" target="_blank">
 <button class="glass-panel text-white font-label-caps py-3 md:py-4 px-6 md:px-10 rounded-full border border-white/10 hover:border-primary transition-all duration-300 scale-95 active:scale-90 text-sm md:text-base">
                 Learn More
             </button>
+</a>
 </div>
 </div>
 </section>
@@ -240,9 +242,7 @@
 <p class="font-body-md text-body-md text-on-surface-variant mb-6">Civithon is the premier interdisciplinary hackathon of 2026, held as part of the Civitronic-Z club inauguration. Our aim is to bridge the gap between hardware, software, and structural engineering, fostering innovation that transcends traditional silos through collaborative engineering excellence.</p>
 
 </div>
-</div>
-<!-- Core Network with Simulation Visualization -->
-</div>
+
 </div>
 </section>
 <!-- Restructured Hackathon Specs Section -->
@@ -252,23 +252,102 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 <!-- Left Side: Problem Statements -->
 <div class="glass-panel p-10 rounded-xl border-l-4 border-l-primary">
+
 <div class="flex items-center gap-4 mb-8">
 <span class="font-ui-mono text-primary text-sm bg-primary/10 px-3 py-1 rounded-md">01</span>
 <h3 class="font-headline-md text-headline-md text-white">Problem Statements</h3>
 </div>
-<div class="space-y-8">
-<div class="border-b border-white/5 pb-6">
-<h4 class="font-headline-sm text-white mb-2">Smart Infrastructure</h4>
-<p class="font-body-md text-on-surface-variant">Develop automated structural health monitoring systems using distributed sensor networks for aging urban architecture.</p>
+
+<div class="space-y-4">
+
+<!-- 1 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">Flood Prediction and Smart Drainage System</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
 </div>
-<div class="border-b border-white/5 pb-6">
-<h4 class="font-headline-sm text-white mb-2">Energy Efficiency</h4>
-<p class="font-body-md text-on-surface-variant">Design intelligent HVAC control algorithms that integrate real-time occupancy data with renewable energy fluctuations.</p>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+Urban flooding causes major damage due to poor drainage and lack of monitoring. A smart system can use sensors and weather data to predict floods and manage water flow effectively.
+</p>
 </div>
-<div>
-<h4 class="font-headline-sm text-white mb-2">Autonomous Logistics</h4>
-<p class="font-body-md text-on-surface-variant">Optimize last-mile delivery routes using interdisciplinary hardware solutions in dense civil environments.</p>
+
+<!-- 2 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">Coastal Erosion Monitoring and Protection System</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
 </div>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+Coastal areas are losing land due to erosion and climate changes. A system using sensors or data analysis can help monitor erosion and provide protection solutions.
+</p>
+</div>
+
+<!-- 3 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">Traffic Management During Metro Construction in Bengaluru</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
+</div>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+Metro construction leads to congestion, delays, and pollution. A smart traffic system can use real-time data and AI to optimize routes.
+</p>
+</div>
+
+<!-- 4 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">Smart Monitoring and Preservation of Aging Structures</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
+</div>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+Old buildings and bridges may become unsafe over time. Sensors can detect cracks early and prevent structural failures.
+</p>
+</div>
+
+<!-- 5 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">Smart Urban Heat Island Reduction System</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
+</div>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+Cities become hotter due to concrete and lack of greenery. Green roofs and reflective materials can help reduce heat.
+</p>
+</div>
+
+<!-- 6 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">Smart Infrastructure Health Monitoring System</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
+</div>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+IoT-based monitoring systems can track infrastructure health and provide early maintenance alerts.
+</p>
+</div>
+
+<!-- 7 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">Smart Parking and Urban Space Optimization</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
+</div>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+Smart parking systems can guide users to available spots and reduce traffic congestion.
+</p>
+</div>
+
+<!-- 8 -->
+<div class="ps-item border border-white/5 rounded-lg p-4 cursor-pointer" onclick="togglePS(this)">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-white">IoT and Data Analysis to Eliminate Non-Revenue Water</h4>
+<span class="material-symbols-outlined ps-arrow text-white transition-transform duration-300">expand_more</span>
+</div>
+<p class="ps-content text-on-surface-variant mt-2 hidden">
+IoT sensors can detect leaks early and reduce water wastage in urban systems.
+</p>
+</div>
+
 </div>
 </div>
 <!-- Right Side: Stacked Details and Rules -->
@@ -282,7 +361,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 <div>
 <p class="text-xs font-label-caps text-primary mb-1">LOCATION</p>
-<p class="font-body-md text-on-surface-variant text-sm md:text-base">Innovation Lab, BMSIT&M Campus, Bengaluru</p>
+<p class="font-body-md text-on-surface-variant text-sm md:text-base"> Seminar Hall, Second Floor, Sir MV Block, BMSIT&M Campus, Bengaluru</p>
 </div>
 <div><p class="text-xs font-label-caps text-primary mb-1">DATE & TIMING</p><p class="font-body-md text-on-surface-variant text-sm md:text-base">May 26, 2026 | 09:00 AM onwards</p></div><div><p class="text-xs font-label-caps text-primary mb-1">PRIZE POOL</p><p class="font-body-md text-on-surface-variant text-sm md:text-base">₹5,000</p></div></div>
 </div>
@@ -299,12 +378,17 @@
                         </li>
 <li class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
-                            PPT template to be followed strictly.
+                            Team members should be from different branches to encourage interdisciplinary collaboration
                         </li>
 <li class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
-                            1.5 hours execution protocol.
+                            Every team should submit the PPT before 22 nd it should be uploaded in our club mail id (civitroniczclub@gmail.com)
                         </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                            Once submitted, No changes allowed to the ppt.
+                        </li>
+
 </ul>
 </div>
 </div>
@@ -336,25 +420,34 @@
 </div>
 <!-- Timeline Item 2 -->
 <div class="relative flex flex-col md:flex-row-reverse items-center gap-12 group">
+
 <div class="md:w-1/2 text-left hidden md:block">
 <h4 class="font-headline-md text-headline-md text-white">Club Inauguration & Hackathon</h4>
-<p class="text-on-surface-variant mt-2">24 hours of pure engineering at Civithon.</p>
+<p class="text-on-surface-variant mt-2">Hackathon for Pure engineering at Civithon.</p>
 </div>
+
 <div class="relative z-10 w-12 h-12 bg-black rounded-full border-4 border-background flex items-center justify-center border-primary shadow-[0_0_15px_rgba(255,31,31,0.5)]">
 <div class="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
 </div>
+
 <div class="md:w-1/2">
-<div class="glass-panel p-6 rounded-xl md:group-hover:border-primary transition-colors text-right">
-<span class="font-label-caps text-primary">MAY 26</span>
-<h4 class="md:hidden font-headline-md text-headline-md text-white mb-2">Club Inauguration & Hackathon</h4>
-<div class="font-body-md text-on-surface-variant space-y-2">
+<div class="glass-panel p-6 rounded-xl md:group-hover:border-primary transition-colors text-left md:text-right">
+
+<span class="font-label-caps text-primary block text-left md:text-right">MAY 26</span>
+
+<h4 class="md:hidden font-headline-md text-headline-md text-white mb-2 text-left md:text-left">Club Inauguration & Hackathon</h4>
+
+<div class="font-body-md text-on-surface-variant space-y-2 text-left md:text-left">
+
 <p><span class="font-label-caps text-primary">09:00 AM</span> - Club Inauguration Ceremony</p>
-<p><span class="font-label-caps text-primary">12:00 PM</span> - Hackathon Begins (24 hours)</p>
+
+<p><span class="font-label-caps text-primary">12:00 PM</span> - Hackathon Begins</p>
+
+</div>
+
 </div>
 </div>
-</div>
-</div>
-</div>
+
 </div>
 </section>
 <!-- FAQ Section with Click-to-Reveal Accordion -->
@@ -607,4 +700,26 @@ civitroniczclub@gmail.com
         particles.forEach(p => p.color = isLight ? 'rgba(255, 31, 31, 0.2)' : 'rgba(255, 31, 31, 0.4)');
     }
   }
+  //Problem statement section
+function togglePS(element) {
+    const allItems = document.querySelectorAll('.ps-item');
+
+    const content = element.querySelector('.ps-content');
+    const arrow = element.querySelector('.ps-arrow');
+
+    const isOpen = !content.classList.contains('hidden');
+
+    // close all
+    allItems.forEach(item => {
+        item.querySelector('.ps-content').classList.add('hidden');
+        const a = item.querySelector('.ps-arrow');
+        if (a) a.style.transform = "rotate(0deg)";
+    });
+
+    // open clicked one
+    if (!isOpen) {
+        content.classList.remove('hidden');
+        arrow.style.transform = "rotate(180deg)";
+    }
+}
 </script></body></html>
