@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Civitronic-Z | Interdisciplinary Innovation Club</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#121212",
+                        "surface-container-high": "#1e1e1e",
+                        "surface-container-low": "#181818",
+                        "primary": "#ff1f1f",
+                        "on-primary": "#ffffff",
+                        "secondary": "#ffffff",
+                        "on-secondary": "#000000",
+                        "tertiary": "#ffffff",
+                        "on-surface": "#ffffff",
+                        "on-surface-variant": "#a0a0a0",
+                        "outline": "#333333",
+                        "outline-variant": "#222222",
+                        "surface-container-lowest": "#0a0a0a",
+                        "surface-container-highest": "#252525",
+                        "error": "#ff1f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "max-width": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["JetBrains Mono"],
+                        "ui-mono": ["JetBrains Mono"],
+                        "headline-md": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "ui-mono": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #121212; color: #ffffff; overflow-x: hidden; }
+        .material-symbols-outlined { 
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .glass-panel { backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .pill-glow { box-shadow: 0 0 20px rgba(255, 31, 31, 0.1); }
+        
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; opacity: 0.3; }
+        .grid-overlay { background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px; }
+
+        @keyframes fadeOut { from { opacity: 1; visibility: visible; } to { opacity: 0; visibility: hidden; } }
+        @keyframes logoPulse { 0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(255,31,31,0)); } 50% { transform: scale(1.05); filter: drop-shadow(0 0 40px rgba(255,31,31,0.6)); } 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(255,31,31,0)); } }
+        .intro-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; animation: fadeOut 1s ease-in 4s forwards; }
+        .intro-logo { animation: logoPulse 3s infinite ease-in-out; }
+
+        #hero-three-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; }
+        .faq-item.active .faq-answer { max-height: 200px; padding-top: 12px; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .intro-logo { width: 224px !important; height: 224px !important; }
+        }
+        
+        @media (max-width: 640px) {
+            .intro-logo { width: 224px !important; height: 224px !important; }
+        }
+    </style>
+<style>
+  .light-theme {
+    background-color: #f5f5f5 !important;
+    color: #121212 !important;
+  }
+  .light-theme .bg-background {
+    background-color: #ffffff !important;
+  }
+  .light-theme .bg-surface-container-lowest {
+    background-color: #f0f0f0 !important;
+  }
+  .light-theme .text-white,
+  .light-theme .font-display-lg,
+  .light-theme .font-headline-md,
+  .light-theme .font-headline-sm {
+    color: #121212 !important;
+  }
+  .light-theme .text-on-surface-variant {
+    color: #616161 !important;
+  }
+  .light-theme .glass-panel {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  .light-theme .border-white\/10,
+  .light-theme .border-white\/5 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  .light-theme .grid-overlay {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px) !important;
+  }
+  .light-theme #bg-canvas {
+    opacity: 0.1;
+  }
+</style></head>
+<body class="font-body-md selection:bg-primary selection:text-white">
+<canvas id="bg-canvas"></canvas>
+<!-- Cinematic Intro Sequence -->
+<div class="intro-overlay" style="background-color: #000000;"><div class="flex flex-col items-center gap-6">
+<div class="relative">
+<div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full animate-pulse"></div>
+<img alt="Civitronic-Z Emblem" class="w-56 md:w-80 h-56 md:h-80 relative z-10 intro-logo object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA60OH4cx5rx5nPbJ0tMRI-WXeheglrZbnqwCEjpuEvihTus9SeeWUCJTTX0WQkIo3H5z_OX53KfDxTz13dqBlsJUnqWPpyN23KmbgLTHajUmixBF3aDSz8-Wmvbj_XKbB7Qzf0P62CksMbsTOwhPIaeLOFV4OlmImNZqqQP3rFg_zFrH5LbH3DQHkMJXlX2YwWtaBM5iGLCe-QOnoXC5XAaeuEYFqOdnpinESJ62qmCK3J9cLjtGN9LuiZLGo2dmdhmm2eabhUszU"/>
+</div>
+<div class="text-center z-10">
+<h1 class="font-display-lg text-[50px] md:text-[120px] font-bold text-white tracking-[0.1em] leading-none mb-2 md:mb-4 select-none drop-shadow-[0_0_30px_rgba(255,31,31,0.3)]">CIVITHON</h1>
+<div class="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
+<p class="font-label-caps text-primary tracking-[0.8em] text-xs md:text-sm mt-4 md:mt-6">CIVITRONIC-Z</p>
+</div>
+</div></div>
+<!-- Navigation Bar -->
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 md:px-12 py-0 rounded-full border border-white/10 glass-panel pill-glow min-w-[95%] md:min-w-[1200px] h-14 md:h-20">
+  <!-- Logo Section -->
+    <div class="flex items-center gap-2 md:gap-4 flex-shrink-0 h-full">
+        <div class="flex items-center justify-center w-28 md:w-36 h-full overflow-visible">
+            <img alt="Civitronic-Z Logo" class="h-[160%] md:h-[160%] w-auto object-contain" src="logo.png"/>
+        </div>
+        <span class="font-headline-sm text-sm md:text-xl font-bold text-white hidden sm:inline-block tracking-tight">CIVITRONIC-Z</span>
+    </div>
+
+  <!-- Center Navigation -->
+  <div class="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+    <a href="#events" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">Events</a>
+    <a href="#timeline" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">Timeline</a>
+    <a href="#faq" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">FAQ</a>
+    <a href="#contact" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">Contact</a>
+  </div>
+
+  <!-- Right Section -->
+  <div class="flex items-center gap-4 md:gap-6 flex-shrink-0">
+    <span class="material-symbols-outlined text-lg md:text-xl text-on-surface-variant cursor-pointer hover:text-white transition-colors" onclick="toggleTheme(this)">light_mode</span>
+    <img alt="BMSIT Logo" class="w-7 md:w-9 h-7 md:h-9 rounded-full border border-outline-variant/30 object-cover" src="clgLogo.png"/>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScZ2eLSLH8R-llb3qhSu3--v5Dx8D4Gy0LSIGeiTqIB0PJ1MQ/viewform" target="_blank" class="hidden md:block bg-primary text-white px-5 md:px-7 py-2 rounded-full text-xs md:text-sm font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20">Register Now</a>
+  </div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center pt-24 px-margin-mobile md:px-margin-desktop grid-overlay overflow-hidden">
+<div id="hero-three-container"></div>
+<div class="relative z-10 text-center max-w-4xl">
+<p class="font-label-caps text-label-caps text-primary mb-2 md:mb-4 tracking-[0.4em] text-[9px] md:text-[12px]">INTERDISCIPLINARY INNOVATION CLUB</p>
+<h1 class="font-display-lg text-display-lg md:text-[84px] leading-tight mb-4 md:mb-6 bg-gradient-to-b from-white to-on-surface-variant bg-clip-text text-transparent uppercase text-3xl md:text-5xl">
+            CIVITHON
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6 md:mb-10 max-w-2xl mx-auto text-sm md:text-base">
+            Experience the synergy of core engineering and electronic intelligence. Join the premier interdisciplinary hackathon of 2026.
+        </p>
+<div class="flex flex-col sm:flex-row gap-gutter justify-center">
+<a href="https://docs.google.com/forms/d/e/1FAIpQLScZ2eLSLH8R-llb3qhSu3--v5Dx8D4Gy0LSIGeiTqIB0PJ1MQ/viewform" target="_blank" class="inline-block bg-primary text-white font-label-caps py-3 md:py-4 px-6 md:px-10 rounded-full border border-primary hover:bg-transparent hover:text-white transition-all duration-300 scale-95 active:scale-90 shadow-[0_0_20px_rgba(255,31,31,0.4)] text-sm md:text-base">
+                Register Now
+            </a>
+<button class="glass-panel text-white font-label-caps py-3 md:py-4 px-6 md:px-10 rounded-full border border-white/10 hover:border-primary transition-all duration-300 scale-95 active:scale-90 text-sm md:text-base">
+                Learn More
+            </button>
+</div>
+</div>
+</section>
+<!-- Info & About Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="max-w-max-width mx-auto">
+<h2 class="font-display-lg text-display-lg text-white mb-12 flex items-center gap-4 text-2xl md:text-4xl"><span class="w-8 md:w-12 h-[1px] bg-primary"></span> About the Hackathon</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-panel p-10 rounded-xl relative overflow-hidden group md:col-span-3">
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl transition-all duration-700 group-hover:scale-150"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary mb-4 text-4xl block">developer_board</span>
+<h3 class="font-headline-md text-headline-md text-white mb-4">Interdisciplinary Innovation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Civithon is the premier interdisciplinary hackathon of 2026, held as part of the Civitronic-Z club inauguration. Our aim is to bridge the gap between hardware, software, and structural engineering, fostering innovation that transcends traditional silos through collaborative engineering excellence.</p>
+
+</div>
+</div>
+<!-- Core Network with Simulation Visualization -->
+</div>
+</div>
+</section>
+<!-- Restructured Hackathon Specs Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-background" id="events">
+<div class="max-w-max-width mx-auto">
+<h2 class="font-display-lg text-display-lg text-white mb-12 uppercase text-2xl md:text-4xl">Hackathon Specs</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Left Side: Problem Statements -->
+<div class="glass-panel p-10 rounded-xl border-l-4 border-l-primary">
+<div class="flex items-center gap-4 mb-8">
+<span class="font-ui-mono text-primary text-sm bg-primary/10 px-3 py-1 rounded-md">01</span>
+<h3 class="font-headline-md text-headline-md text-white">Problem Statements</h3>
+</div>
+<div class="space-y-8">
+<div class="border-b border-white/5 pb-6">
+<h4 class="font-headline-sm text-white mb-2">Smart Infrastructure</h4>
+<p class="font-body-md text-on-surface-variant">Develop automated structural health monitoring systems using distributed sensor networks for aging urban architecture.</p>
+</div>
+<div class="border-b border-white/5 pb-6">
+<h4 class="font-headline-sm text-white mb-2">Energy Efficiency</h4>
+<p class="font-body-md text-on-surface-variant">Design intelligent HVAC control algorithms that integrate real-time occupancy data with renewable energy fluctuations.</p>
+</div>
+<div>
+<h4 class="font-headline-sm text-white mb-2">Autonomous Logistics</h4>
+<p class="font-body-md text-on-surface-variant">Optimize last-mile delivery routes using interdisciplinary hardware solutions in dense civil environments.</p>
+</div>
+</div>
+</div>
+<!-- Right Side: Stacked Details and Rules -->
+<div class="flex flex-col gap-8">
+<!-- Venue & Details -->
+<div class="glass-panel p-8 rounded-xl flex-1 border border-white/5">
+<div class="flex items-center gap-4 mb-6">
+<span class="font-ui-mono text-on-surface-variant text-sm bg-white/5 px-3 py-1 rounded-md">02</span>
+<h3 class="font-headline-sm text-white">Venue &amp; Details</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div>
+<p class="text-xs font-label-caps text-primary mb-1">LOCATION</p>
+<p class="font-body-md text-on-surface-variant text-sm md:text-base">Innovation Lab, BMSIT&M Campus, Bengaluru</p>
+</div>
+<div><p class="text-xs font-label-caps text-primary mb-1">DATE & TIMING</p><p class="font-body-md text-on-surface-variant text-sm md:text-base">May 26, 2026 | 09:00 AM onwards</p></div><div><p class="text-xs font-label-caps text-primary mb-1">PRIZE POOL</p><p class="font-body-md text-on-surface-variant text-sm md:text-base">₹5,000</p></div></div>
+</div>
+<!-- Rules & Protocol -->
+<div class="glass-panel p-8 rounded-xl flex-1 border border-white/5">
+<div class="flex items-center gap-4 mb-6">
+<span class="font-ui-mono text-on-surface-variant text-sm bg-white/5 px-3 py-1 rounded-md">03</span>
+<h3 class="font-headline-sm text-white">Rules &amp; Protocol</h3>
+</div>
+<ul class="space-y-3 font-body-md text-on-surface-variant">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                            Open to all undergraduate engineering students.
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                            PPT template to be followed strictly.
+                        </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                            1.5 hours execution protocol.
+                        </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest grid-overlay" id="timeline">
+<div class="max-w-max-width mx-auto">
+<h2 class="font-display-lg text-display-lg text-center text-white mb-20 uppercase tracking-widest text-2xl md:text-4xl">Operation Timeline</h2>
+<div class="relative space-y-12">
+<div class="absolute left-1/2 -translate-x-1/2 w-[2px] h-full bg-white/10 hidden md:block"></div>
+<!-- Timeline Item 1 -->
+<div class="relative flex flex-col md:flex-row items-center gap-12 group">
+<div class="md:w-1/2 text-right hidden md:block">
+<h4 class="font-headline-md text-headline-md text-primary">Registration Phase</h4>
+<p class="text-on-surface-variant mt-2">Opening the gates for innovation.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-black rounded-full border-4 border-background flex items-center justify-center border-primary shadow-[0_0_15px_rgba(255,31,31,0.5)]">
+<div class="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+</div>
+<div class="md:w-1/2">
+<div class="glass-panel p-6 rounded-xl md:group-hover:border-primary transition-colors">
+<span class="font-label-caps text-primary">MAY 15</span>
+<h4 class="md:hidden font-headline-md text-headline-md text-white mb-2">Registration Phase</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Submit your team profiles and initial concepts via the portal.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative flex flex-col md:flex-row-reverse items-center gap-12 group">
+<div class="md:w-1/2 text-left hidden md:block">
+<h4 class="font-headline-md text-headline-md text-white">Club Inauguration & Hackathon</h4>
+<p class="text-on-surface-variant mt-2">24 hours of pure engineering at Civithon.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-black rounded-full border-4 border-background flex items-center justify-center border-primary shadow-[0_0_15px_rgba(255,31,31,0.5)]">
+<div class="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+</div>
+<div class="md:w-1/2">
+<div class="glass-panel p-6 rounded-xl md:group-hover:border-primary transition-colors text-right">
+<span class="font-label-caps text-primary">MAY 26</span>
+<h4 class="md:hidden font-headline-md text-headline-md text-white mb-2">Club Inauguration & Hackathon</h4>
+<div class="font-body-md text-on-surface-variant space-y-2">
+<p><span class="font-label-caps text-primary">09:00 AM</span> - Club Inauguration Ceremony</p>
+<p><span class="font-label-caps text-primary">12:00 PM</span> - Hackathon Begins (24 hours)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section with Click-to-Reveal Accordion -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-background" id="faq">
+<div class="max-w-4xl mx-auto">
+<h2 class="font-display-lg text-display-lg text-white text-center mb-16 uppercase text-2xl md:text-4xl">Frequently Queried</h2>
+<div class="space-y-4">
+<div class="glass-panel p-6 rounded-xl faq-item cursor-pointer group active" onclick="toggleFaq(this)">
+<div class="flex items-center justify-between">
+<h5 class="font-headline-sm text-headline-sm text-white flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">help</span>
+                        Who can participate?
+                    </h5>
+<span class="material-symbols-outlined text-on-surface-variant faq-icon transition-transform">expand_more</span>
+</div>
+<div class="faq-answer">
+<p class="font-body-md text-body-md text-on-surface-variant">Undergraduate students from any engineering background with a passion for interdisciplinary innovation. Cross-branch teams are highly encouraged.</p>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl faq-item cursor-pointer group" onclick="toggleFaq(this)">
+<div class="flex items-center justify-between">
+<h5 class="font-headline-sm text-headline-sm text-white flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">help</span>
+                        Is there a registration fee?
+                    </h5>
+<span class="material-symbols-outlined text-on-surface-variant faq-icon transition-transform">expand_more</span>
+</div>
+<div class="faq-answer">
+<p class="font-body-md text-body-md text-on-surface-variant">Registration for Civithon 2026 is free for all qualified student teams. However, selection is based on the initial conceptual abstract submission.</p>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl faq-item cursor-pointer group" onclick="toggleFaq(this)">
+<div class="flex items-center justify-between">
+<h5 class="font-headline-sm text-headline-sm text-white flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">help</span>
+                        Team size requirements?
+                    </h5>
+<span class="material-symbols-outlined text-on-surface-variant faq-icon transition-transform">expand_more</span>
+</div>
+<div class="faq-answer">
+<p class="font-body-md text-body-md text-on-surface-variant">Teams must consist of 2 to 4 members. Interdepartmental teams are compulsory - at least 1 student must be from a different department.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-white/5 px-margin-mobile md:px-margin-desktop py-16" id="contact">
+<div class="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+<!-- Left Column: Contact Boxes -->
+<div class="flex flex-col gap-8">
+<h3 class="font-label-caps text-primary tracking-widest mb-4">COORDINATION CONTACTS</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="glass-panel p-6 rounded-xl border-l-2 border-l-primary">
+<p class="font-ui-mono text-sm text-on-surface-variant mb-1 uppercase">Club President</p>
+<h4 class="font-headline-sm text-white mb-2">Harsha Vardhan N Y</h4>
+<p class="font-ui-mono text-primary text-sm">+91 93425 19391</p>
+</div>
+<div class="glass-panel p-6 rounded-xl border-l-2 border-l-primary">
+<p class="font-ui-mono text-sm text-on-surface-variant mb-1 uppercase">Vice President</p>
+<h4 class="font-headline-sm text-white mb-2">K Y K Govardhana</h4>
+<p class="font-ui-mono text-primary text-sm">+91 80880 41249</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Club Info & Links -->
+<div class="flex flex-col md:items-end text-center md:text-right">
+<div class="flex items-center md:justify-end gap-4 mb-6">
+<img alt="Civitronic-Z" class="w-32 h-32 object-contain" src="logo.png"/>
+<span class="font-headline-md text-headline-md text-white">CIVITRONIC-Z</span>
+</div>
+<p class="font-ui-mono text-on-surface-variant max-w-sm mb-8 leading-relaxed">
+                The premier interdisciplinary engineering club at BMSIT&amp;M, bridging the gap between structure and intelligence.
+            </p>
+<div class="flex flex-col md:items-end gap-4 mb-10">
+<a class="font-headline-sm text-white hover:text-primary transition-colors flex items-center gap-2" href="mailto:info@civitronicz.com">
+<span class="material-symbols-outlined text-primary text-xl">mail</span> info@civitronicz.com
+                </a>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-white text-xl">share</span>
+</div>
+<div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-white text-xl">public</span>
+</div>
+<!-- LinkedIn -->
+<div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all cursor-pointer">
+  <i class="fa-brands fa-linkedin-in text-white text-xl"></i>
+</div>
+
+<!-- Instagram -->
+<div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all cursor-pointer">
+  <i class="fa-brands fa-instagram text-white text-xl"></i>
+</div></div>
+</div>
+<div class="pt-8 border-t border-white/5 w-full flex flex-col md:flex-row md:justify-end gap-6 font-ui-mono text-xs text-on-surface-variant">
+<span>© 2026 CIVITRONIC-Z. ENGINEERED AT BMSIT&amp;M.</span>
+<div class="flex gap-4">
+<a class="hover:text-white transition-colors" href="#">PRIVACY</a>
+<a class="hover:text-white transition-colors" href="#">TERMS</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Global background animation
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, particles = [];
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.3;
+            this.vy = (Math.random() - 0.5) * 0.3;
+            this.size = Math.random() * 1.5;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) this.reset();
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(255, 31, 31, 0.4)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particles = Array.from({ length: 80 }, () => new Particle());
+    }
+
+    function animateBg() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animateBg);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    initParticles();
+    animateBg();
+
+    // Three.js Hero Background
+    const heroContainer = document.getElementById('hero-three-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, heroContainer.clientWidth / (heroContainer.clientHeight || 1), 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(heroContainer.clientWidth, heroContainer.clientHeight);
+    heroContainer.appendChild(renderer.domElement);
+
+    // Create a technical-looking group of objects
+    const group = new THREE.Group();
+    
+    const geo1 = new THREE.IcosahedronGeometry(2.8, 1);
+    const mat1 = new THREE.MeshBasicMaterial({ color: 0xff1f1f, wireframe: true, transparent: true, opacity: 0.15 });
+    const mesh1 = new THREE.Mesh(geo1, mat1);
+    group.add(mesh1);
+
+    const geo2 = new THREE.IcosahedronGeometry(3.2, 0);
+    const mat2 = new THREE.MeshBasicMaterial({ color: 0xff1f1f, wireframe: true, transparent: true, opacity: 0.05 });
+    const mesh2 = new THREE.Mesh(geo2, mat2);
+    group.add(mesh2);
+
+    const geo3 = new THREE.SphereGeometry(1.5, 16, 16);
+    const mat3 = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.03 });
+    const mesh3 = new THREE.Mesh(geo3, mat3);
+    group.add(mesh3);
+
+    scene.add(group);
+    camera.position.z = 6;
+
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) / 300;
+        mouseY = (e.clientY - window.innerHeight / 2) / 300;
+    });
+
+    function onWindowResize() {
+        camera.aspect = heroContainer.clientWidth / (heroContainer.clientHeight || 1);
+        camera.updateProjectionMatrix();
+        renderer.setSize(heroContainer.clientWidth, heroContainer.clientHeight);
+    }
+    window.addEventListener('resize', onWindowResize);
+
+    function animateThree() {
+        requestAnimationFrame(animateThree);
+        group.rotation.x += 0.002;
+        group.rotation.y += 0.002;
+        mesh1.rotation.y -= 0.003;
+        mesh3.rotation.z += 0.005;
+        
+        group.position.x += (mouseX - group.position.x) * 0.05;
+        group.position.y += (-mouseY - group.position.y) * 0.05;
+        
+        renderer.render(scene, camera);
+    }
+    animateThree();
+
+    // FAQ Toggle Logic
+    function toggleFaq(element) {
+        const isActive = element.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        if (!isActive) {
+            element.classList.add('active');
+        }
+    }
+    </script>
+<script>
+  function toggleTheme(icon) {
+    const body = document.body;
+    const isLight = body.classList.toggle('light-theme');
+    icon.textContent = isLight ? 'dark_mode' : 'light_mode';
+    
+    // Update Three.js and Canvas colors if necessary
+    if (typeof particles !== 'undefined') {
+        particles.forEach(p => p.color = isLight ? 'rgba(255, 31, 31, 0.2)' : 'rgba(255, 31, 31, 0.4)');
+    }
+  }
+</script></body></html>
