@@ -101,6 +101,10 @@
         }
     </style>
 <style>
+  .navbarLogo{
+    background-image: url('logo.png');
+    border-color: red;
+  }
   .light-theme {
     background-color: #f5f5f5 !important;
     color: #121212 !important;
@@ -150,63 +154,108 @@
 </div>
 </div></div>
 <!-- Navigation Bar -->
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 md:px-12 rounded-full border border-white/10 glass-panel pill-glow w-[95%] md:w-[1200px] h-14 md:h-20">
+<nav
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50
+         flex items-center justify-evenly
+         w-[95%] md:w-[1200px]
+         h-14 md:h-20
+         px-4 md:px-4
+         rounded-full border border-white/10
+         glass-panel pill-glow"
+>
+<!-- LEFT -->
+<div class="flex items-center flex-shrink-0 min-w-0">
 
-  <!-- Logo Section (GRID FIX - BEST ALIGNMENT) -->
-<div class="grid grid-cols-[auto_auto] items-center gap-3 md:gap-4 h-full">
-
-  <!-- Logo Container -->
-  <div class="flex items-center justify-center h-12 w-12 md:h-16 md:w-16">
-    <img 
-      src="logo.png" 
+  <!-- Logo -->
+  <div class="flex items-center justify-center flex-shrink-0">
+    <img
+      src="logo.png"
       alt="Civitronic-Z Logo"
-      class="w-full h-full object-cover block"
+      class="h-20 w-20 md:h-40 md:w-40 pt-2 md:pt-4 object-contain block"
     />
   </div>
-
+  <div class="flex items-center min-w-0">
+    <span
+      class="text-sm md:text-xl font-bold text-white leading-none whitespace-nowrap"
+    >
+      CIVITRONIC-Z
+    </span>
+  </div>
   
-  <span class="font-headline-sm text-sm md:text-xl font-bold text-white leading-none whitespace-nowrap">
-    CIVITRONIC-Z
-  </span>
-
 </div>
+  <div class="hidden lg:flex items-center justify-center gap-8 xl:gap-10">
+    <a
+      href="#events"
+      class="text-sm font-medium text-on-surface-variant hover:text-white transition-all"
+    >
+      Events
+    </a>
 
-  <!-- Center Navigation -->
-  <div class="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-    <a href="#events" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">Events</a>
-    <a href="#timeline" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">Timeline</a>
-    <a href="#faq" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">FAQ</a>
-    <a href="#contact" class="text-xs md:text-sm font-medium text-on-surface-variant hover:text-white transition-all hover:scale-105">Contact</a>
+    <a
+      href="#timeline"
+      class="text-sm font-medium text-on-surface-variant hover:text-white transition-all"
+    >
+      Timeline
+    </a>
+
+    <a
+      href="#faq"
+      class="text-sm font-medium text-on-surface-variant hover:text-white transition-all"
+    >
+      FAQ
+    </a>
+
+    <a
+      href="#contact"
+      class="text-sm font-medium text-on-surface-variant hover:text-white transition-all"
+    >
+      Contact
+    </a>
   </div>
 
-  <!-- Right Section -->
-  <div class="flex items-center gap-4 md:gap-6 flex-shrink-0">
+  <!-- RIGHT -->
+  <div class="flex items-center gap-3 md:gap-5 flex-shrink-0">
 
-    <span 
-      class="material-symbols-outlined text-lg md:text-xl text-on-surface-variant cursor-pointer hover:text-white transition-colors"
+    <!-- Theme Toggle -->
+    <span
+      class="material-symbols-outlined
+             text-lg md:text-xl
+             text-on-surface-variant
+             cursor-pointer hover:text-white transition-colors"
       onclick="toggleTheme(this)"
     >
       light_mode
     </span>
 
-    <img 
-      src="clgLogo.png" 
-      alt="BMSIT Logo" 
-      class="w-7 md:w-9 h-7 md:h-9 rounded-full border border-outline-variant/30 object-cover"
+    <!-- College Logo -->
+    <img
+      src="clgLogo.png"
+      alt="BMSIT Logo"
+      class="h-8 w-8 md:h-10 md:w-10
+             rounded-full border border-outline-variant/30 object-cover"
     />
 
-    <a 
+    <!-- CTA -->
+    <a
       href="https://docs.google.com/forms/d/e/1FAIpQLScZ2eLSLH8R-llb3qhSu3--v5Dx8D4Gy0LSIGeiTqIB0PJ1MQ/viewform"
       target="_blank"
-      class="hidden md:block bg-primary text-white px-5 md:px-7 py-2 rounded-full text-xs md:text-sm font-bold hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20"
+      class="hidden md:flex items-center justify-center
+             bg-primary text-white
+             px-5 md:px-7 py-2
+             rounded-full
+             text-xs md:text-sm
+             font-bold
+             hover:bg-primary/90
+             transition-all active:scale-95
+             shadow-lg shadow-primary/20
+             whitespace-nowrap"
     >
       Register Now
     </a>
 
   </div>
 
-</nav>
-<!-- Hero Section -->
+</nav><!-- Hero Section -->
 <section class="relative min-h-screen flex items-center justify-center pt-24 px-margin-mobile md:px-margin-desktop grid-overlay overflow-hidden">
 <div id="hero-three-container"></div>
 <div class="relative z-10 text-center max-w-4xl">
